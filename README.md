@@ -18,6 +18,8 @@ packages/
 - [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
 - [Vite](https://vite.dev) for dev server and builds
 - [Playwright](https://playwright.dev) for end-to-end tests (with UI mode)
+- [Vitest](https://vitest.dev) for unit tests
+- [Turborepo](https://turborepo.com) for task orchestration and caching
 - [oxlint](https://oxc.rs/docs/guide/usage/linter) for linting, [oxfmt](https://oxc.rs/docs/guide/usage/formatter) for formatting
 
 ## Getting started
@@ -39,3 +41,13 @@ npm run dev
 | `npm run format:check` | Check formatting only                                           |
 | `npm run test:e2e`     | Run Playwright tests headless (starts dev server automatically) |
 | `npm run test:ui`      | Open Playwright UI mode                                         |
+| `npm test`             | Run unit tests (Vitest, model package)                          |
+
+## CI
+
+`.github/workflows/ci.yml` runs on pushes and PRs to `main`:
+
+1. **Build** — `npm run build`, uploads `packages/ui/dist` as an artifact
+2. **Unit tests** — `npm test` (Vitest)
+3. **E2E tests** — Playwright (Chromium), uploads the HTML report as an artifact
+4. **CodeQL static analysis** — `javascript-typescript` queries; results appear under the repo's **Security → Code scanning** tab

@@ -6,17 +6,20 @@
     "packages/*"
   ],
   "type": "module",
+  "packageManager": "npm@11.19.1",
   "scripts": {
-    "dev": "npm run dev --workspace ui",
-    "build": "npm run build --workspace @map-of-damnation/model && npm run build --workspace ui",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
     "lint": "oxlint .",
+    "test": "turbo run test",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "test:e2e": "npm run test:e2e --workspace ui",
-    "test:ui": "npm run test:ui --workspace ui"
+    "test:e2e": "turbo run test:e2e",
+    "test:ui": "turbo run test:ui"
   },
   "devDependencies": {
     "oxfmt": "^0.73.0",
-    "oxlint": "^1.88.0"
+    "oxlint": "^1.88.0",
+    "turbo": "^2.11.9"
   }
 }
