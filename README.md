@@ -45,9 +45,9 @@ npm run dev
 
 ## CI
 
-`.github/workflows/ci.yml` runs on pushes and PRs to `main`:
+`.github/workflows/ci.yml` runs on pushes and PRs to `main`, staged as a dependency chain:
 
 1. **Build** — `npm run build`, uploads `packages/ui/dist` as an artifact
-2. **Unit tests** — `npm test` (Vitest)
-3. **E2E tests** — Playwright (Chromium), uploads the HTML report as an artifact
-4. **CodeQL static analysis** — `javascript-typescript` queries; results appear under the repo's **Security → Code scanning** tab
+2. **Unit tests** — `npm test` (Vitest) — runs only if the build succeeded
+3. **E2E tests** — Playwright (Chromium), uploads the HTML report as an artifact — runs in parallel with unit tests, both gated on the build
+4. **CodeQL static analysis** — `javascript-typescript` queries — runs last, only after both test suites pass; results appear under the repo's **Security → Code scanning** tab
