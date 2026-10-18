@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { totalPercentGoingToHell } from "@map-of-damnation/model";
 import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
 
+const DEMO_RELIGIONS = [{ id: "demo", name: "Demo", worldPopulationPercent: 10, savedPercent: 50 }];
+
 function App() {
   const [count, setCount] = useState(0);
+  const demoHellPercent = totalPercentGoingToHell(DEMO_RELIGIONS);
 
   return (
     <>
@@ -24,6 +28,7 @@ function App() {
         <button type="button" className="counter" onClick={() => setCount((count) => count + 1)}>
           Count is {count}
         </button>
+        <p>Demo percent going to hell: {demoHellPercent.toFixed(1)}%</p>
       </section>
 
       <div className="ticks"></div>
